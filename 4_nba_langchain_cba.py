@@ -11,6 +11,10 @@ prompt = ChatPromptTemplate.from_template("Teach me about {topic}")
 # using LangChain Expressive Language chain syntax
 # learn more about the LCEL on
 # /docs/concepts/#langchain-expression-language-lcel
+
+#Chaining can mean making multiple LLM calls in a sequence. Language models are often non deterministic and can make errors, 
+# so making multiple calls to check previous outputs or to break down larger tasks into bite-sized steps can improve results.
+#OutputParser that parses LLMResult into the top likely string.
 chain = prompt | llm | StrOutputParser()
 
 # for brevity, response is printed in terminal

@@ -23,16 +23,6 @@ def get_embedding_function():
     return embeddings
 
 
-def main():
-    # Create CLI.
-    # parser = argparse.ArgumentParser()
-    # parser.add_argument("query_text", type=str, help="The query text.")
-    # args = parser.parse_args()
-    # query_text = args.query_text
-    # query_rag(query_text)
-    query_rag()
-
-
 def query_rag():
     # Prepare the DB.
     embedding_function = get_embedding_function()
@@ -44,6 +34,7 @@ def query_rag():
     results = db.similarity_search_with_score(user_message, k=5)
 
     context_text = "\n\n---\n\n".join([doc.page_content for doc, _score in results])
+    print("context_text:", context_text)
     prompt_template = ChatPromptTemplate.from_template(PROMPT_TEMPLATE)
     prompt = prompt_template.format(context=context_text, question=user_message)
     # print(prompt)
@@ -57,5 +48,4 @@ def query_rag():
     return response_text
 
 
-if __name__ == "__main__":
-    main()
+query_rag()
